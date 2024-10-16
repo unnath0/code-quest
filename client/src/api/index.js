@@ -13,7 +13,7 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-console.log(process.env.REACT_APP_API_URL)
+// console.log(process.env.REACT_APP_API_URL)
 
 export const logIn = (authData) => API.post("/user/login", authData);
 export const signUp = (authData) => API.post("/user/signup", authData);
