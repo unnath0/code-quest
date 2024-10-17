@@ -24,7 +24,7 @@ const QuestionsDetails = () => {
   const dispatch = useDispatch();
   const User = useSelector((state) => state.currentUserReducer);
   const location = useLocation();
-  const url = process.env.REACT_APP_API_URL;
+  const url = "http://localhost:5000/api";
 
   const handlePostAns = (e, answerLength) => {
     e.preventDefault();
