@@ -6,8 +6,10 @@ const EditProfileForm = ({ currentUser, setSwitch }) => {
   const [name, setName] = useState(currentUser?.result?.name);
   const [about, setAbout] = useState(currentUser?.result?.about);
   const [tags, setTags] = useState([]);
+  const [profilePicture, setProfilePicture] = useState(null);
+
   const dispatch = useDispatch();
-  console.log(tags);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (tags[0] === "" || tags.length === 0) {
@@ -48,6 +50,15 @@ const EditProfileForm = ({ currentUser, setSwitch }) => {
             type="text"
             id="tags"
             onChange={(e) => setTags(e.target.value.split(" "))}
+          />
+        </label>
+        <label htmlFor="profilePicture">
+          <h3>Change profile picture</h3>
+          <p>Click to upload an image form local storage</p>
+          <input
+            type="file"
+            id="profilePicture"
+            onChange={(e) => setProfilePicture(e.target.value)}
           />
         </label>
         <br />
