@@ -32,6 +32,7 @@ const UserProfile = ({ slideIn, handleSlideIn }) => {
                 px="40px"
                 py="30px"
               >
+                {/*TODO: use image from user details instead of first character*/}
                 {currentProfile?.name.charAt(0).toUpperCase()}
               </Avatar>
               <div className="user-name">
