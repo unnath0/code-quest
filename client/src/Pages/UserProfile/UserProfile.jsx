@@ -25,16 +25,29 @@ const UserProfile = ({ slideIn, handleSlideIn }) => {
         <section>
           <div className="user-details-container">
             <div className="user-details">
-              <Avatar
-                backgroundColor="purple"
-                color="white"
-                fontSize="50px"
-                px="40px"
-                py="30px"
-              >
-                {/*TODO: use image from user details instead of first character*/}
-                {currentProfile?.name.charAt(0).toUpperCase()}
-              </Avatar>
+              {currentProfile?.profilePicture ? (
+                <img
+                  src={currentProfile.profilePicture}
+                  alt="Profile"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                    overflow: "hidden",
+                  }}
+                />
+              ) : (
+                <Avatar
+                  backgroundColor="purple"
+                  color="white"
+                  fontSize="50px"
+                  px="20px"
+                  py="20px"
+                >
+                  {/*If profile picture is not available, show the first character of the user's name*/}
+                  {currentProfile?.name.charAt(0).toUpperCase()}
+                </Avatar>
+              )}
               <div className="user-name">
                 <h1>{currentProfile?.name}</h1>
                 <p>
