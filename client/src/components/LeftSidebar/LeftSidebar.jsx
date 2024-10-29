@@ -18,7 +18,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
       style={slideIn ? slideInStyle : slideOutStyle}
     >
       <nav className="side-nav">
-        <button onClick={() => handleSlideIn()} className="nav-btn">
+        <button onClick={() => handleSlideIn()} className="nav-btn1">
           <NavLink to="/" className="side-nav-links" activeclassname="active">
             <p>Home</p>
           </NavLink>
@@ -27,7 +27,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
           <div>
             <p>PUBLIC</p>
           </div>
-          <button onClick={() => handleSlideIn} className="nav-btn">
+          <button onClick={() => handleSlideIn} className="nav-btn1">
             <NavLink
               to="/Questions"
               className="side-nav-links"
@@ -37,7 +37,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
               <p style={{ paddingLeft: "10px" }}> Questions </p>
             </NavLink>
           </button>
-          <button onClick={() => handleSlideIn} className="nav-btn">
+          <button onClick={() => handleSlideIn} className="nav-btn1">
             <NavLink
               to="/Tags"
               className="side-nav-links"
@@ -47,7 +47,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
               <p>Tags</p>
             </NavLink>
           </button>
-          <button onClick={() => handleSlideIn} className="nav-btn">
+          <button onClick={() => handleSlideIn} className="nav-btn1">
             <NavLink
               to="/Users"
               className="side-nav-links"
