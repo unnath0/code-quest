@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import decode from "jwt-decode"
 
 import "./Auth.css";
 import icon from "../../assets/icon.png";
 import AboutAuth from "./AboutAuth";
-import { signup, login } from "../../actions/auth";
+import { signup, login, googleAuth } from "../../actions/auth";
+
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [name, setName] = useState("");
@@ -34,6 +37,24 @@ const Auth = () => {
       dispatch(signup({ name, email, password }, navigate));
     } else {
       dispatch(login({ email, password }, navigate));
+    }
+  };
+
+ const handleGoogleSuccess = (credentialResponse) => {
+    const decoded = decode(credentialResponse.credential);
+    const { email, name, picture, sub: googleId } = decoded;
+    
+    const result = {
+      email,
+      name,
+      googleId,
+      profilePicture: picture
+    };
+
+    try {
+      dispatch(googleAuth(result, navigate));
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -88,9 +109,19 @@ const Auth = () => {
               }}
             />
           </label>
+
           <button type="submit" className="auth-btn">
             {isSignup ? "Sign up" : "Log in"}
           </button>
+
+         <div className="auth-btn-container">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+          </div>
         </form>
         <p>
           {isSignup ? "Already have an account?" : "Don't have an account?"}
