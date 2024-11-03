@@ -7,7 +7,7 @@ import decode from "jwt-decode"
 import "./Auth.css";
 import icon from "../../assets/icon.png";
 import AboutAuth from "./AboutAuth";
-import { signup, login } from "../../actions/auth";
+import { signup, login, googleAuth } from "../../actions/auth";
 
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
