@@ -24,3 +24,16 @@ export const login = (authData, navigate) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const googleAuth = (result, navigate) => async (dispatch) => {
+  try {
+    // Send Google auth data to backend
+    const { data } = await api.googleLogin(result);
+    
+    dispatch({ type: 'AUTH', data });
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem('Profile'))));
+    navigate('/');
+  } catch (error) {
+    console.log(error);
+  }
+};

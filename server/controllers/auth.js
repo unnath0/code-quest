@@ -49,3 +49,44 @@ export const login = async (req, res) => {
     res.status(500).json("Something went worng...");
   }
 };
+
+export const googleLogin = async (req, res) => {
+  const { email, name, googleId, profilePicture } = req.body;
+
+  try {
+    // Check if user already exists
+    const existingUser = await users.findOne({ email });
+
+    if (existingUser) {
+      // User exists, log them in
+      const token = jwt.sign(
+        { email: existingUser.email, id: existingUser._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
+
+      res.status(200).json({ result: existingUser, token });
+    } else {
+      // Create new user
+      const result = await users.create({
+        email,
+        name,
+        googleId,
+        profilePicture,
+        // Set a random password since we don't need it for Google auth
+        password: jwt.sign({ email }, process.env.JWT_SECRET)
+      });
+
+      const token = jwt.sign(
+        { email: result.email, id: result._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
+
+      res.status(200).json({ result, token });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong..." });
+    console.log(error);
+  }
+};
